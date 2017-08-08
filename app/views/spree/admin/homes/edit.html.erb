@@ -1,0 +1,19 @@
+<div class="row" id="spree_home_edit">
+	<div class="col-xs-12 col-md-3">
+	<ul class="list-group" id="spree_item_modules">
+		<li class="list-group-item active">Modules</li>
+		<% @item_modules.each do|k, v| %>
+			<li class="list-group-item"><%= k.to_s.titleize %> <span class="icon icon-plus pull-right add-home-module" data-moduleid="<%= v %>"></span></li>
+		<% end %>	
+	</ul>
+	</div>
+	<div class="col-xs-12 col-md-9" id="spree_home_item_content">
+		<ul class="list-group" id="spree_home_item_list">
+			<li class="list-group-item active clearfix"><%= @home.name %> Index <button class="btn btn-success pull-right" id="publish" data-homeid="<%= params[:id]%>">Publish</button></li>
+			<%= render 'module' %>
+		</ul>	
+	</div>
+</div>
+<script>
+	home_setup('<%= @home.id%>', '<%= @parent_item.id%>')
+</script>

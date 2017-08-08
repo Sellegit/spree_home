@@ -1,0 +1,14 @@
+en:
+  home:
+    save: 'Save'
+    publish: 'Publish'
+    error_add: 'Error when add'
+    form:
+      product: 'Product'
+      title: 'Title'
+      taxon: 'Taxon'
+      image: 'Image'
+      url: 'URL'
+    table:
+      name: 'Name'
+      state: 'State'

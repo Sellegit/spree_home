@@ -1,0 +1,44 @@
+<% content_for :page_title do %>
+  <%= 	@title %>
+<% end %>
+<% content_for :page_actions do %>
+  <%= button_tag I18n.t('home.save'), class: "btn btn-success", id: 'save' %>
+<% end %>
+<div class="col-xs-12 col-md-8">
+	<form enctype="multipart/form-data" method="post" id="form">
+	<div class="form-group">
+		<label for="title"><%= I18n.t('home.form.title') %></label>
+		<input class="form-control" id="title" value="<%= @home_item.name %>" name="home_item[name]">
+	</div>
+	<div class="form-group">
+		<label for="select"><%= I18n.t('home.form.image') %></label>
+		<input type="file" class="form-control" name="home_item[attachment]">
+		<%= image_tag @home_item.top_banner_image_url  if @home_item.top_banner_image_url %>
+	</div>
+	</form>
+</div>
+<script>
+
+	$("#save").on('click', function(){
+			var url = '/admin/homes/'+ <%= params[:home_id]%> + '/home_items/' + <%= params[:id]%> + '/update'
+					$this = $(this);
+					$this.text('Saving').prop('disabled', true);
+			$.ajax({
+				type: 'POST',
+				url: url,
+				processData: false,
+				contentType: false,
+				data: new FormData(document.getElementById('form'))
+			}).done(function(data){
+				if(data.status){
+					location.href = data.path
+				}else{
+					alert(data.msg)
+				}
+			}).fail(function(){
+				alert("Error")
+			}).always(function(){
+				$this.text('Save').prop('disabled', false);
+			})
+	})
+</script>

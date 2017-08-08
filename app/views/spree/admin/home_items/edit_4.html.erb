@@ -1,0 +1,86 @@
+<% content_for :page_title do %>
+  <%= 	@title %>
+<% end %>
+<% content_for :page_actions do %>
+  <%= button_tag I18n.t('home.save'), class: "btn btn-success", id: 'save' %>
+<% end %>
+<div class="col-xs-12 col-md-8">
+	<div class="form-group">
+		<label for="title"><%= I18n.t('home.form.title') %></label>
+		<input class="form-control" id="title" value="<%= @home_item.name %>"å>
+	</div>
+	<div class="form-group">
+		<label for="select"><%= I18n.t('home.form.product') %></label>
+		<div>
+			<input class="home_product_picker" id="select"><button class="btn btn-primary" id="add">Add</button>
+		</div>
+	</div>
+</div>
+<div class="col-xs-12 col-md-8">
+	<%=  render partial: 'product_list', locals: { items: @home_item.backend_product_items} %>
+</div>
+<style>
+.home_product_picker{
+	display: inline-block;
+	width: 60%
+}
+</style>
+<script>
+
+	var $select = $("#select"), $tbody = $("tbody");
+		$select.productAutocomplete({multiple: false})
+	$("#add").on('click', function(){
+		var $this = $(this),
+				url = '/admin/homes/'+ <%= params[:home_id]%> + '/home_items/' + <%= params[:id]%> + '/add_product',
+				data = { parent_id: <%= params[:id] %>, home_id: <%= params[:home_id]%>, module_type: 4 };
+
+
+		if(!$select.val()){
+			alert("Please select a product");
+			return 
+		}
+
+		data['item_id'] = $select.val();
+		
+		$this.text('Adding').prop('disabled', true);	
+		$.ajax({
+			type: 'POST',
+			url: url,
+			data: { product : data }
+		}).done(function(data){
+			$tbody.append(insertProduct(data.data));
+			$select.select2('val', '')
+		}).fail(function(){
+			alert("Error")
+		}).always(function(){
+				$this.text('Save').prop('disabled', false);
+			})
+	})
+
+	$("#save").on('click', function(){
+			var $this = $(this), 
+					url = '/admin/homes/'+ <%= params[:home_id]%> + '/home_items/' + <%= params[:id]%> + '/update',
+					data = {name: $("#title").val()};
+
+			$this.text('Saving').prop('disabled', true);		
+
+			$.ajax({
+				type: 'POST',
+				url: url,
+				data: { home_item : data }
+			}).done(function(data){
+				if(data.status){
+					location.href = data.path
+				}else{
+					alert(data.msg)
+				}
+			}).fail(function(){
+				alert("Error")
+			}).always(function(){
+				$this.text('Save').prop('disabled', false);
+			})		
+	})
+	function insertProduct(data){
+		return '<tr id="spree_dom_' + data.id+'"><td class="move-handle"><span class="icon icon-sort handle"></span></td><td>' + data.name + '</td><td>' + data.state + '</td><td><button type="button" class="btn btn-sm btn-danger delete-product" data-id="' + data.id + '">Delete</button></td></tr>'
+	}
+</script>

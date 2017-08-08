@@ -1,0 +1,14 @@
+<% content_for :page_title do %>
+  <%= plural_resource_name(Spree::Home) %>
+<% end %>
+
+
+<% if @homes.any? %>
+  <div id="list-taxonomies" data-hook>
+    <%= render 'list' %>
+  </div>
+<% else %>
+  <div class="alert alert-info no-objects-found">
+    <%= Spree.t(:no_resource_found, resource: plural_resource_name(Spree::Home)) %>,
+  </div>
+<% end %>

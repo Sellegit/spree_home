@@ -1,0 +1,40 @@
+<table class="table home-sortable">
+  <thead>
+    <tr>
+      <th></th>
+      <th><%= I18n.t('home.table.name') %></th>
+      <th><%= I18n.t('home.table.state') %></th>
+      <th></th>
+    </tr>
+	</thead>
+	<tbody>
+	<%	items.each do|item| %>
+	<% if product = item.product %>	
+		<tr id="<%= spree_dom_id item %>">
+			<td class="move-handle">
+        <span class="icon icon-sort handle"></span>
+    	</td>
+			<td><%= product.name %></td>
+			<td><%= product.available? ? 'Available':'Unavailable' %></td>
+			<td><button type="button" class="btn btn-sm btn-danger delete-product" data-id="<%= item.id %>">Delete</button></td>
+		</tr>
+	<% end %>	
+	<% end %>	
+  </tbody>
+</table>
+<script>
+	$(".delete-product").on('click', function(){
+		var  $this = $(this),
+					url = '/admin/homes/'+ <%= params[:home_id]%> + '/home_items/' + $this.data('id') + '/delete';
+					
+		$.ajax({
+			type: 'POST',
+			url: url,
+			data: {}
+		}).done(function(data){
+			$this.parents('tr').remove()
+		}).fail(function(){
+			alert("Error")
+		})
+	})
+</script>

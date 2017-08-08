@@ -1,0 +1,17 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+zh-CN:
+  home:
+    save: '保存'
+    publish: '发布'
+    error_add: '添加出错'
+    form:
+      product: '商品'
+      title: '标题'
+      taxon: 'Taxon'
+      image: '图片'
+      url: 'URL'
+    table:
+      name: '名称'
+      state: '状态'

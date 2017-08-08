@@ -1,0 +1,99 @@
+<% content_for :page_title do %>
+  <%= 	@title %>
+<% end %>
+<% content_for :page_actions do %>
+  <%= button_tag I18n.t('home.save'), class: "btn btn-success", id: 'save' %>
+<% end %>
+<div class="col-xs-12 col-md-8">
+	<form enctype="multipart/form-data" method="post" id="form">
+	<div class="form-group">
+		<label for="title"><%= I18n.t('home.form.taxon') %></label>
+		<div class="taxon-products-view">
+		<div class="form-group">
+			<input id="find_taxon">
+			<input id="item_id"  name="home_item[item_id]" value="<%= @home_item.item_id%>" type="hidden">
+			<input id="item_name"  name="home_item[name]" value="<%= @home_item.name%>" type="hidden">
+		</div>
+	</div>
+	</div>
+	<div class="form-group">
+		<label for="select"><%= I18n.t('home.form.image') %></label>
+		<input type="file" class="form-control" name="home_item[attachment]">
+		<%= image_tag @home_item.taxon_image_url  if @home_item.taxon_image_url %>
+	</div>
+	</form>
+</div>
+<script>
+
+	var formatTaxon, taxon_name = '<%= @home_item.name%>';
+
+		formatTaxon = function(taxon) {
+      return Select2.util.escapeMarkup(taxon.pretty_name);
+		}
+
+		taxon_name = taxon_name ? taxon_name : Spree.translations.find_a_taxon
+	
+		if ($('#find_taxon').length > 0) {
+      $('#find_taxon').select2({
+        dropdownCssClass: "taxon_select_box",
+        placeholder: taxon_name,
+        ajax: {
+          url: Spree.routes.taxons_api,
+          datatype: 'json',
+          data: function(term, page) {
+            return {
+              per_page: 50,
+              page: page,
+              without_children: true,
+              token: Spree.api_key,
+              q: {
+                name_cont: term
+              }
+            };
+          },
+          results: function(data, page) {
+            var more;
+						more = page < data.pages;
+            return {
+              results: data['taxons'],
+              more: more
+            };
+          }
+        },
+        formatResult: formatTaxon,
+        formatSelection: formatTaxon
+      });
+		}
+		
+	$("#save").on('click', function(){
+			var url = '/admin/homes/'+ <%= params[:home_id]%> + '/home_items/' + <%= params[:id]%> + '/update',
+					$this = $(this), 
+					data;
+
+			$this.text('Saving').prop('disabled', true) ;
+
+			data = $("#find_taxon").select2('data');
+			if(data){
+				$("#item_id").val(data.id)
+				$("#item_name").val(data.name)
+			}
+
+			$.ajax({
+				type: 'POST',
+				url: url,
+				processData: false,
+				contentType: false,
+				data: new FormData(document.getElementById('form'))
+			}).done(function(data){
+				if(data.status){
+					location.href = data.path
+				}else{
+					alert(data.msg)
+				}
+			}).fail(function(){
+				alert("Error")
+			}).always(function(){
+				$this.text('Save').prop('disabled', false);
+			})
+	})
+</script>
