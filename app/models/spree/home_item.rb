@@ -34,9 +34,9 @@ module Spree
 			if image
 				case self.module_type
 				when 1
-					image&.attachment&.url(:carousel)
+					image&.attachment&.url(:top_banner )
 				when 2
-					image&.attachment&.url(:top_banner)
+					image&.attachment&.url(:carousel)
 				when 3
 					image&.attachment&.url(:taxon)
 				end
