@@ -9,6 +9,7 @@ module Spree
 
 		has_many :home_images, dependent: :destroy
 		belongs_to :product, :class_name => "Spree::Product", :foreign_key =>"item_id"
+		belongs_to :taxon, :class_name => "Spree::Taxon", :foreign_key =>"item_id"
 
 		before_create :reorder_item_module
 
