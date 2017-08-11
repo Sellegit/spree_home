@@ -7,7 +7,7 @@ node do|home_item|
 		{ :product_id => product.id, 
 			:product_name => product.name, 
 			:display_price =>  product.display_min_price,
-			:primary_image_url => product.master.images.first.maybe.attachment.url(:compressed).just}
+			:primary_image_url => product.master.images.first.maybe.attachment.url(:large).just}
 	end
 end
 node do|home_item|
