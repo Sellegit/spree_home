@@ -11,8 +11,6 @@ node do|home_item|
 	end
 end
 node do|home_item|
-	
-	
 	if (home_item.module_type == 3) && (taxon = home_item.taxon)
 		{
 			:taxon_id => taxon.id,

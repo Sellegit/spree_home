@@ -1,10 +1,13 @@
-# Sample localization file for English. Add more files in this directory for other locales.
-# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
-
 zh-CN:
+  home_menu: '首页配置'
   home:
+    module: '可添加模块'	
+    publish: '发布'
     save: '保存'
     publish: '发布'
+    add: '添加'
+    edit: '编辑'
+    delete: '删除'
     error_add: '添加出错'
     form:
       product: '商品'

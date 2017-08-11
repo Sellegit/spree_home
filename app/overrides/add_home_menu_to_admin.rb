@@ -4,6 +4,6 @@ Deface::Override.new(
     :insert_top => "#main-sidebar",
     :text =>
         "<ul class='nav nav-sidebar'>
-          <%= tab :homes, icon: 'wrench' %>
+          <%= tab I18n.t('home_menu'),url: spree.admin_homes_path, icon: 'wrench' %>
         </ul>",
     :disabled => false)

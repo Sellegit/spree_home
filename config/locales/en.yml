@@ -1,7 +1,13 @@
 en:
+  home_menu: 'Home'
   home:
+    module: 'Modules'	
+    publish: 'Publish'
     save: 'Save'
     publish: 'Publish'
+    add: 'Add'
+    edit: 'Edit'
+    delete: 'Delete'		
     error_add: 'Error when add'
     form:
       product: 'Product'
