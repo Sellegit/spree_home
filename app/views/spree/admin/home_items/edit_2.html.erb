@@ -35,7 +35,7 @@
 				return 
 			}		
 
-			$this.text('Saving').prop('disabled', true) ;
+			$this.prop('disabled', true) ;
 			
 			$.ajax({
 				type: 'POST',
@@ -52,7 +52,7 @@
 			}).fail(function(){
 				alert("Error")
 			}).always(function(){
-				$this.text('Save').prop('disabled', false);
+				$this.prop('disabled', false);
 			})
 	})
 </script>

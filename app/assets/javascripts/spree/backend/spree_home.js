@@ -47,7 +47,7 @@ jQuery(function(){
 		var  $this = $(this),
 					url = '/admin/homes/'+ home_config['home_id'] + '/home_items/' + $this.data('id') + '/delete';
 
-		$this.text('Deleting').prop('disabled', true);
+		$this.prop('disabled', true);
 
 		$.ajax({
 			type: 'POST',
@@ -58,7 +58,7 @@ jQuery(function(){
 		}).fail(function(){
 			alert("Error")
 		}).always(function(){
-			$this.text('Delete').prop('disabled', false);
+			$this.prop('disabled', false);
 		})
 
 	})
@@ -66,7 +66,7 @@ jQuery(function(){
 	$(".add-carousel").on('click', function(){
 		var $this = $(this),
 				url = '/admin/homes/'+ $this.data('homeid') + '/home_items/' +  $this.data('id') + '/add';
-		$this.text('Adding').prop('disabled', true)		
+		$this.prop('disabled', true)		
 		$.ajax({
 			type: 'POST',
 			url: url,
@@ -76,14 +76,14 @@ jQuery(function(){
 		}).fail(function(){
 			alert("Error")
 		}).always(function(){
-			$this.text('Add').prop('disabled', false)
+			$this.prop('disabled', false)
 		})
 	})
 
 	$("#publish").on('click', function(){
 		var $this = $(this), url;
 		url = '/admin/homes/' + $this.data('homeid') +'/publish'
-		$this.text('Publishing').prop('disabled', true);
+		$this.prop('disabled', true);
 		$.post({
 			type: 'POST',
 			url: url,
@@ -94,7 +94,7 @@ jQuery(function(){
 		}).fail(function(){
 			alert('error')
 		}).always(function(){
-			$this.text('Publish').prop('disabled', false);
+			$this.prop('disabled', false);
 		})
 	})
 

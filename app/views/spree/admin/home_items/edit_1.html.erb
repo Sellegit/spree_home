@@ -22,7 +22,7 @@
 	$("#save").on('click', function(){
 			var url = '/admin/homes/'+ <%= params[:home_id]%> + '/home_items/' + <%= params[:id]%> + '/update'
 					$this = $(this);
-					$this.text('Saving').prop('disabled', true);
+					$this.prop('disabled', true);
 			$.ajax({
 				type: 'POST',
 				url: url,
@@ -38,7 +38,7 @@
 			}).fail(function(){
 				alert("Error")
 			}).always(function(){
-				$this.text('Save').prop('disabled', false);
+				$this.prop('disabled', false);
 			})
 	})
 </script>

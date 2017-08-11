@@ -42,7 +42,7 @@
 
 		data['item_id'] = $select.val();
 		
-		$this.text('Adding').prop('disabled', true);	
+		$this.prop('disabled', true);	
 		$.ajax({
 			type: 'POST',
 			url: url,
@@ -53,7 +53,7 @@
 		}).fail(function(){
 			alert("Error")
 		}).always(function(){
-				$this.text('Save').prop('disabled', false);
+				$this.prop('disabled', false);
 			})
 	})
 
@@ -62,7 +62,7 @@
 					url = '/admin/homes/'+ <%= params[:home_id]%> + '/home_items/' + <%= params[:id]%> + '/update',
 					data = {name: $("#title").val()};
 
-			$this.text('Saving').prop('disabled', true);		
+			$this.prop('disabled', true);		
 
 			$.ajax({
 				type: 'POST',
@@ -77,7 +77,7 @@
 			}).fail(function(){
 				alert("Error")
 			}).always(function(){
-				$this.text('Save').prop('disabled', false);
+				$this.prop('disabled', false);
 			})		
 	})
 	function insertProduct(data){

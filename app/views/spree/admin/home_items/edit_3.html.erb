@@ -70,7 +70,7 @@
 					$this = $(this), 
 					data;
 
-			$this.text('Saving').prop('disabled', true) ;
+			$this.prop('disabled', true) ;
 
 			data = $("#find_taxon").select2('data');
 			if(data){
@@ -93,7 +93,7 @@
 			}).fail(function(){
 				alert("Error")
 			}).always(function(){
-				$this.text('Save').prop('disabled', false);
+				$this.prop('disabled', false);
 			})
 	})
 </script>
