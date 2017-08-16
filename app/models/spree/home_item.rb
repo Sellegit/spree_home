@@ -43,6 +43,11 @@ module Spree
 			end	
 		end
 
+		def web_carousel_url
+			image = Spree::HomeImage.where("home_item_id = ? and active =?", self.id, true).order('updated_at Desc').take
+			image&.attachment&.url(:web_carousel)
+		end
+
 		def top_banner_image_url
 			image&.attachment&.url(:top_banner)
 		end

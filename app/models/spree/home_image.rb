@@ -3,7 +3,7 @@ class Spree::HomeImage < Spree::Base
 	validate :no_attachment_errors
 
 	has_attached_file :attachment,
-										styles: { mini: '128x128>', carousel: '750x422#', taxon: '128x128#', top_banner: '750x172#' },
+										styles: { mini: '128x128>', web_carousel: '1900x541#', carousel: '750x422#', taxon: '128x128#', top_banner: '750x172#' },
 										default_style: :mini,
 										url: '/spree/products/:id/:style/:basename.:extension',
 										path: ':rails_root/public/spree/products/:id/:style/:basename.:extension',

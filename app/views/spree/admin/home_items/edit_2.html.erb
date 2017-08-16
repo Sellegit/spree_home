@@ -18,6 +18,7 @@
 	</div>
 	<div class="form-group">
 		<label for="select"><%= I18n.t('home.form.image') %></label>
+		<div> app the dimension is 750x422, web is 1900x 541 </div>
 		<input type="file" class="form-control" name="home_item[attachment]">
 		<%= image_tag @home_item.carousel_image_url  if @home_item.carousel_image_url %>
 	</div>
